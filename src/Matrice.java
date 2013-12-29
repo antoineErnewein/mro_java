@@ -30,5 +30,29 @@ public class Matrice {
         return A;
     }
 
+	public int getM() {
+		return M;
+	}
+
+	public void setM(int m) {
+		M = m;
+	}
+
+	public int getN() {
+		return N;
+	}
+
+	public void setN(int n) {
+		N = n;
+	}
+
+	public int[][] getData() {
+		return data;
+	}
+
+	public void setData(int[][] data) {
+		this.data = data;
+	}
+
 }
 
