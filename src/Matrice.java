@@ -1,4 +1,6 @@
 import java.lang.Math;
+import java.util.LinkedList;
+import java.util.Queue;
 
 public class Matrice {
 	private int L;
@@ -35,7 +37,7 @@ public class Matrice {
 		L = l;
 	}
 
-	public int[][] getData() {
+	public Matrice getData() {
 		return data;
 	}
 
@@ -44,7 +46,7 @@ public class Matrice {
 	}
 
 	/* Calcule le chemin le plus court entre deux points grâce à la méthode de Floyd Warshall */
-	public static Matrice floydWarshall(){
+	public Matrice floydWarshall(){
 		Matrice A = new Matrice(this.getL());
 		for(int k=0; k < this.getL(); k++){
 		  for(int i=0; i< this.getL(); i++){
@@ -55,5 +57,44 @@ public class Matrice {
 		}
 		return A;
 	  }
+
+  public boolean bfs(int source, int goal){
+    boolean pathFound = false;
+    int numberOfVertices = this.getL();
+    int destination, element;
+    Queue<Integer> queue;
+    int[] parent = new int[numberOfVertices + 1];
+    boolean[] visited = new boolean[numberOfVertices + 1];
+    
+    for(int vertex = 1; vertex <= numberOfVertices; vertex++){
+      parent[vertex] = -1;
+      visited[vertex] = false;
+    }
+
+    queue.add(source);
+    parent[source] = -1;
+    visited[source] = true;
+
+    while(!queue.isEmpty()){
+    
+      element = queue.remove();
+      destination = 1;
+      while (destination <= numberOfVertices)
+            {
+                if (this.getData()[element][destination] > 0 &&  !visited[destination])
+                {
+                    parent[destination] = element;
+                    queue.add(destination);
+                    visited[destination] = true;
+                }
+                destination++;
+            }
+    }
+    if(visited[goal])
+        {
+            pathFound = true;
+        }
+        return pathFound;
+  }
 }
 
