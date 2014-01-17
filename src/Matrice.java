@@ -100,6 +100,33 @@ public class Matrice {
             }
             return mat;
         }
+      
+      //Renvoie a*b
+      public static Matrice multiply(Matrice a, Matrice b) throws MatrixException
+      {  
+          //Condition sur les dimensions
+          if(a.columns != b.lines)
+          {
+            throw new MatrixException("Problème de dimension !");   
+          }
+            Matrice res = new Matrice(a.lines, b.columns);
+            double temp = 0.0;
+            int a_col = 0;
+
+            for(int a_lines = 0; a_lines< a.lines; a_lines++)
+            {
+                for(int b_col = 0; b_col < b.columns; b_col++)
+                {
+                    for(a_col = 0; a_col < a.columns; a_col++)
+                    {
+                        temp += a.getValueAt(a_lines, a_col) * b.getValueAt(a_col, b_col);
+                    }
+                    res.setValueAt(a_lines, b_col, temp);
+                    temp = 0.0;
+                }
+            }
+          return res;
+      }
         
         //Créé une sous-matrice (utilisé pour calculer le déterminant de matrices > 2)
         public static Matrice createSubMatrix(Matrice matrix, int excluding_row, int excluding_col) 

@@ -31,6 +31,10 @@ public class Start
                 Matrice inv = Matrice.getInverse(test);
                 System.out.println("\nInverse A : \n");
                 inv.printMatrice();
+                Matrice verif = Matrice.multiply(test, inv);
+                System.out.println("\nVerification A*A-1 : \n");
+                verif.printMatrice();
+                
             }
         
         catch (MatrixException ex) {
