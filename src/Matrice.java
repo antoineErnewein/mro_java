@@ -3,55 +3,128 @@ import java.util.LinkedList;
 import java.util.Queue;
 
 public class Matrice {
-	private int L;
-	private int[][] data;
+	private int lines;
+        private int columns;
+	private double[][] data;
 	
-	public Matrice(int L){
-		this.L = L;
-		data = new int[L][L];
-	}
-	
-	public void Matrix(int[][] data){
-		L = data.length;
-		this.data = new int[L][L];
-		for (int i = 0; i<L; i++){
-			for(int j = 0; j < L; j++){
-				this.data[i][j] = data[i][j];
-			}
-		}
+	public Matrice(int lines, int columns)
+        {
+		this.lines = lines;
+                this.columns = columns;
+		data = new double[lines][columns];
 	}
 	
-	public static Matrice random(int L) {
-        Matrice A = new Matrice(L);
-        for (int i = 0; i < L; i++)
-            for (int j = 0; j < L; j++)
-                A.data[i][j] = (int) Math.random();
-        return A;
-    }
+	public Matrice(double[][] data)
+        {
+                this.lines = data.length;
+                this.columns = data[0].length;
+		this.data = data;
+	}
+	
+	public static Matrice random(int lines, int columns) 
+        {
+            Matrice A = new Matrice(lines, columns);
 
-	public int getL() {
-		return L;
+            for (int i = 0; i < lines; i++)
+            {
+                for (int j = 0; j < columns; j++)
+                    A.data[i][j] = (int) Math.random();
+            }
+
+            return A;
+        }
+
+	public int getNbLines() {
+		return this.lines;
 	}
 
-	public void setL(int l) {
-		L = l;
+	public int getNbColumns() {
+		return this.columns;
 	}
 
-	public Matrice getData() {
+	public double[][] getData() {
 		return data;
 	}
 
-	public void setData(int[][] data) {
+	public void setData(double[][] data) {
 		this.data = data;
 	}
+        
+        public double getValueAt(int i, int j)
+        {
+            return this.data[i][j];
+        }
+        
+        public void setValueAt(int i, int j, double value)
+        {
+            this.data[i][j] = value;
+        }
+        
+        public double changeSign(double value)
+        {
+            if(value%2 == 0)
+            {
+                return 1;
+            }
+            
+            else
+            {
+                return -1;
+            }
+        }
+        
+        public static Matrice createSubMatrix(Matrice matrix, int excluding_row, int excluding_col) 
+        {
+            Matrice mat = new Matrice(matrix.getNbLines()-1, matrix.getNbColumns()-1);
+            int r = -1;
+            
+            for (int i=0;i<matrix.getNbLines();i++) 
+            {
+                if (i==excluding_row)
+                    continue;
+                    r++;
+                    int c = -1;
+                for (int j=0;j<matrix.getNbColumns();j++) {
+                    if (j==excluding_col)
+                        continue;
+                    mat.setValueAt(r, ++c, matrix.getValueAt(i, j));
+                }
+            }
+            return mat;
+        } 
+        
+        public double getDeterminant() throws MatrixException
+        {
+            Matrice temp = null;
+            
+            if(this.lines != this.columns)
+            {
+                throw new MatrixException("La matrice n'est pas carrée !");
+            }
+            
+            if (this.lines == 2) 
+            {
+                return (this.getValueAt(0, 0) * this.getValueAt(1, 1)) - ( this.getValueAt(0, 1) * this.getValueAt(1, 0));
+            }
+    
+            double sum = 0.0;
+    
+            for (int i=0; i<this.lines; i++) 
+            {
+                temp = createSubMatrix(this, 0, i);
+                sum += changeSign(i) * this.getValueAt(0, i) * temp.getDeterminant();
+            }
+    
+            return sum;
+        }
 
 	/* Calcule le chemin le plus court entre deux points grâce à la méthode de Floyd Warshall */
 	public Matrice floydWarshall(){
-		Matrice A = new Matrice(this.getL());
-		for(int k=0; k < this.getL(); k++){
-		  for(int i=0; i< this.getL(); i++){
-			for(int j=0; j< this.getL(); j++){
-			  A[i][j]=Math.min(this.getData()[i][j],this.getData()[i][k]+this.getData()[k][j]);
+		Matrice A = new Matrice(this.lines,this.columns);
+		for(int k=0; k < this.lines; k++){
+		  for(int i=0; i< this.lines; i++){
+			for(int j=0; j< this.columns; j++){
+			  A.getData()[i][j]=Math.min(this.getData()[i][j],(this.getData()[i][k]+this.getData()[k][j]));
 			}
 		  }
 		}
@@ -60,9 +133,9 @@ public class Matrice {
 
   public boolean bfs(int source, int goal){
     boolean pathFound = false;
-    int numberOfVertices = this.getL();
+    int numberOfVertices = this.lines;
     int destination, element;
-    Queue<Integer> queue;
+    Queue<Integer> queue = null;
     int[] parent = new int[numberOfVertices + 1];
     boolean[] visited = new boolean[numberOfVertices + 1];
     
