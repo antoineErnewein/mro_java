@@ -60,7 +60,20 @@ public class Matrice {
             this.data[i][j] = value;
         }
         
-        public double changeSign(double value)
+        public void printMatrice()
+        {
+            for(int i = 0; i<this.lines; i++)
+            {
+                for(int j = 0; j<this.columns; j++)
+                {
+                    System.out.print(this.getValueAt(i, j) + "\t");
+                }
+                System.out.print('\n');
+            }
+        }
+        
+        //Renvoie 1 si paire sinon -1
+        public static double changeSign(double value)
         {
             if(value%2 == 0)
             {
@@ -73,6 +86,22 @@ public class Matrice {
             }
         }
         
+        //Multiplie la matrice matrix par value
+        public static Matrice multiplyByConst(Matrice matrix, double value)
+        {
+            Matrice mat = new Matrice(matrix.data);
+            
+            for(int i = 0; i<mat.lines; i++)
+            {
+                for(int j = 0; j<mat.columns; j++)
+                {
+                    mat.setValueAt(i, j, (mat.getValueAt(i, j)*value));
+                }
+            }
+            return mat;
+        }
+        
+        //Créé une sous-matrice (utilisé pour calculer le déterminant de matrices > 2)
         public static Matrice createSubMatrix(Matrice matrix, int excluding_row, int excluding_col) 
         {
             Matrice mat = new Matrice(matrix.getNbLines()-1, matrix.getNbColumns()-1);
@@ -93,6 +122,7 @@ public class Matrice {
             return mat;
         } 
         
+        //Calcule le déterminant de la matrice courante
         public double getDeterminant() throws MatrixException
         {
             Matrice temp = null;
@@ -118,6 +148,47 @@ public class Matrice {
             return sum;
         }
 
+        //Renvoie la comatrice de matrix
+        public static Matrice getComatrice(Matrice matrix) throws MatrixException  
+        {
+            Matrice temp = null;
+            Matrice mat = new Matrice(matrix.getNbLines(), matrix.getNbColumns());
+            for (int i=0;i<matrix.getNbLines();i++) 
+            {
+                for (int j=0; j<matrix.getNbColumns();j++) 
+                {
+                    temp = createSubMatrix(matrix, i, j);
+                    mat.setValueAt(i, j, changeSign(i) * changeSign(j) * temp.getDeterminant());
+                }
+            }
+
+            return mat;
+        }
+        
+        //Renvoie la matrice transpose de matrix
+        public static Matrice getTransposee(Matrice matrix) 
+        {
+            Matrice transpose = new Matrice(matrix.getNbColumns(), matrix.getNbLines());
+            for (int i=0;i<matrix.getNbLines();i++) 
+            {
+                for (int j=0;j<matrix.getNbColumns();j++) 
+                {
+                    transpose.setValueAt(j, i, matrix.getValueAt(i, j));
+                }
+            }
+            return transpose;
+        }
+        
+        //Renvoie l'inverse de la matrice matrix
+        public static Matrice getInverse(Matrice matrix) throws MatrixException 
+        {
+            double det = matrix.getDeterminant();
+            Matrice comatrice = getComatrice(matrix);
+            Matrice Tcomatrice = getTransposee(comatrice);
+                    
+            return multiplyByConst(Tcomatrice, 1/det);
+        }
+        
 	/* Calcule le chemin le plus court entre deux points grâce à la méthode de Floyd Warshall */
 	public Matrice floydWarshall(){
 		Matrice A = new Matrice(this.lines,this.columns);

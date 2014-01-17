@@ -19,15 +19,26 @@ public class Start
        double data[][] = {{1,0,0},{0,2,0},{2,1,2}};
        Matrice test = new Matrice(data);
        
-       //Test determinant
+       System.out.println("Matrice A : \n");
+       test.printMatrice();
+       
+       //Test determinant + comatrice + inverse
         try {
-                System.out.println("Determinant matrice : " + test.getDeterminant());
+                System.out.println("\nDeterminant matrice A : " + test.getDeterminant()+"\n");
+                Matrice com = Matrice.getComatrice(test);
+                System.out.println("Comatrice A : \n");
+                com.printMatrice();
+                Matrice inv = Matrice.getInverse(test);
+                System.out.println("\nInverse A : \n");
+                inv.printMatrice();
             }
         
         catch (MatrixException ex) {
             Logger.getLogger(Start.class.getName()).log(Level.SEVERE, null, ex);
         }
        
+        
+        
    }
     
 }
