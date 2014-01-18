@@ -22,19 +22,19 @@ public class FordFulkerson{
       boolean pathFound = false;
       int destination, element;
 
-    for(int vertex = 1; vertex <= numberOfSommet; vertex++){
-      parent[vertex] = -1;
-      visited[vertex] = false;
-    }
+      for(int vertex = 1; vertex <= numberOfSommet; vertex++){
+        parent[vertex] = -1;
+        visited[vertex] = false;
+      }
 
-    queue.add(source);
-    parent[source] = -1;
-    visited[source] = true;
+      queue.add(source);
+      parent[source] = -1;
+      visited[source] = true;
 
-    while(!queue.isEmpty()){
-      element = queue.remove();
-      destination = 1;
-      while (destination <= numberOfSommet)
+      while(!queue.isEmpty()){
+        element = queue.remove();
+        destination = 1;
+        while (destination <= numberOfSommet)
             {
                 if (matrix[element][destination] > 0 &&  !visited[destination])
                 {
@@ -44,12 +44,12 @@ public class FordFulkerson{
                 }
                 destination++;
             }
-    }
-    if(visited[goal])
+        }
+      if(visited[goal])
         {
             pathFound = true;
         }
-        return pathFound;
+      return pathFound;
   }
   //Calcul du flot maximal dans un graphe donné
   public int findMaxFlow(int matrix[][], int source, int destination){
