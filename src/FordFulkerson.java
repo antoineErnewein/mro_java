@@ -49,6 +49,37 @@ public class FordFulkerson{
         }
         return pathFound;
   }
+  //Calcul du flot maximal dans un graphe donné
+  public int findMaxFlow(int matrix[][], int source, int destination){
+
+    int a,d;
+    int flow = 0;
+    int path;
+    int[][] resteMatrix = new int[numberOfSommet+1][numberOfSommet+1];
+
+    for(int initSommet = 1; initSommet<=numberOfSommet; initSommet++){
+      for(int finalSommet = 1; finalSommet<=numberOfSommet; finalSommet++){
+        resteMatrix[initSommet][finalSommet] = matrix[initSommet][finalSommet];
+      }
+    }
+
+    while(exploredepth(source, destination, resteMatrix)){
+      path = Integer.MAX_VALUE;  // infinie pour le chemin de base
+
+      for(d = destination; d!=source; d=parent[d]){
+        a = parent[d];
+        path = Math.min(path, resteMatrix[a][d]);
+      }
+      for(d = destination; d!=source; d=parent[d]){
+        a = parent[d];
+        resteMatrix[a][d] -= path;
+        resteMatrix[d][a] += path;
+      }
+      flow += path;
+    }
+
+    return flow;
+  }
 }
 
 
