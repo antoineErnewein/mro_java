@@ -1,3 +1,4 @@
+import java.lang.Math;
 import java.util.LinkedList;
 import java.util.Queue;
 
@@ -16,6 +17,7 @@ public class FordFulkerson{
         this.queue = new LinkedList<Integer>();
     }
 
+    //Méthode d'exploration de graph en profondeur
     public boolean exploredepth(int source, int goal, int matrix[][]){
       boolean pathFound = false;
       int destination, element;

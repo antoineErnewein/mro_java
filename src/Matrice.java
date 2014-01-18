@@ -1,6 +1,4 @@
 import java.lang.Math;
-import java.util.LinkedList;
-import java.util.Queue;
 
 public class Matrice {
 	private int lines;
