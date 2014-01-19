@@ -316,6 +316,38 @@ public class Simplexe
         }
     }
     
+    //Check la clause optimum = -infini
+    private boolean checkOptimumInfini(Matrice delta)
+    {
+        boolean optimumIsInfini = true;
+        
+        for(int i = 0; i<delta.getNbColumns(); i++)
+        {
+            if(delta.getValueAt(0, i) < 0)
+            {
+                for(int j = 0; j<this.Abarre.getNbLines(); j++)
+                {
+                    if(this.Abarre.getValueAt(j, i) >= 0)
+                    {
+                        optimumIsInfini = false;
+                    }
+                }
+                
+                //Si pour un delta <0 tous les aij barre sont <0
+                if(optimumIsInfini)
+                {
+                    return true;
+                }
+                else{
+                    optimumIsInfini = true;
+                }
+            }
+            
+        }
+        
+        return false;
+    }
+    
     //Déroule le simplexe !
     public void runSimplexe() throws MatrixException
     {
@@ -363,7 +395,12 @@ public class Simplexe
                 this.X.printMatrice();
             }
             
-            //AJOUTER CLAUSE OPTIMUM = -infini
+            //VERIFIER CLAUSE OPTIMUM = -infini
+            else if(checkOptimumInfini(delta))
+            {
+                nonOptimale = false;
+                System.out.println("Optimum = -infini !");
+            }
             
             else
             {

@@ -33,6 +33,12 @@ public class Start
         double dataX[][] = {{6,4,1,0,0}};
         double contraintes[][] = {{3,1,4,2,-2}};
         
+        //EXAM 2008-2009
+        /*double dataA[][] = {{1,0,0,2,3},{0,2,0,4,0},{2,1,2,0,2}};
+        double datab[][] = {{6},{6},{27}};
+        double dataX[][] = {{6,3,6,0,0}};
+        double contraintes[][] = {{3,1,4,4,-1}};*/
+        
         Matrice A = new Matrice(dataA);
         Matrice b = new Matrice(datab);
         Matrice X = new Matrice(dataX);
