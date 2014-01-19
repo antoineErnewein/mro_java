@@ -73,6 +73,7 @@ public class Simplexe
         return res;
     }
     
+    
     //Renvoie la position du delta minimum
     private int getMinDeltaPos(Matrice delta)
     {
@@ -121,8 +122,8 @@ public class Simplexe
             else
             {
                 copyColumn(i, colB, this.A, this.B);
-                ciDansB.setValueAt(i, 0, this.contraintes.getValueAt(0, i));
-                iDansB.setValueAt(i, 0, i);
+                ciDansB.setValueAt(colB, 0, this.contraintes.getValueAt(0, i));
+                iDansB.setValueAt(colB, 0, i);
                 colB++;
             }
         }
@@ -133,7 +134,7 @@ public class Simplexe
         System.out.println("\nMatrice B :\n");
         this.B.printMatrice();
         System.out.println("\nMatrice N :\n");
-        this.B.printMatrice();
+        this.N.printMatrice();
         
         
     }
@@ -362,7 +363,7 @@ public class Simplexe
                 this.X.printMatrice();
             }
             
-            //AJOUTER SI TOUS LES DELTAS <0
+            //AJOUTER CLAUSE OPTIMUM = -infini
             
             else
             {
@@ -381,7 +382,7 @@ public class Simplexe
                 //On met r à la place de s
                 copyColumn(r, 0, this.Abarre, temp);
                 copyColumn(s, r, this.Abarre, this.Abarre);
-                copyColumn(r, 0, temp, this.Abarre);
+                copyColumn(0, r, temp, this.Abarre);
                 updateCiDansB(ciDansB, iDansB, s, r);
                
                 //Mettre B et N à jour par rapport à A barre
