@@ -221,17 +221,4 @@ public class Matrice {
                     
             return multiplyByConst(Tcomatrice, 1/det);
         }
-        
-	/* Calcule le chemin le plus court entre deux points grâce à la méthode de Floyd Warshall */
-	public Matrice floydWarshall(){
-		Matrice A = new Matrice(this.lines,this.columns);
-		for(int k=0; k < this.lines; k++){
-		  for(int i=0; i< this.lines; i++){
-			for(int j=0; j< this.columns; j++){
-			  A.getData()[i][j]=Math.min(this.getData()[i][j],(this.getData()[i][k]+this.getData()[k][j]));
-			}
-		  }
-		}
-		return A;
-	  }
 }

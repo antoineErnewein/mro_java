@@ -95,7 +95,7 @@ public class Johnson {
         double data[][] = {{5,7},{6,4},{9,8},{7,5},{8,10},{6,6},{4,3},{5,6}};
         Matrice test = new Matrice(data);
         System.out.println(Johnson.getShortestPaths(test));
-        
+                
         double data2[][] = {{2,6,2},{2,6,6},{8,2,6},{6,2,8},{6,6,2},{6,3,0}};
         Matrice test2 = new Matrice(data2);
         System.out.println(Johnson.getShortestPaths(test2));
