@@ -129,7 +129,15 @@ public class Matrice {
         //Créé une sous-matrice (utilisé pour calculer le déterminant de matrices > 2)
         public static Matrice createSubMatrix(Matrice matrix, int excluding_row, int excluding_col) 
         {
-            Matrice mat = new Matrice(matrix.getNbLines()-1, matrix.getNbColumns()-1);
+            Matrice mat;
+            if(excluding_row==-1)
+                mat = new Matrice(matrix.getNbLines(), matrix.getNbColumns()-1);
+            else if(excluding_col==-1)
+                mat = new Matrice(matrix.getNbLines()-1, matrix.getNbColumns());
+            else{
+                mat = new Matrice(matrix.getNbLines()-1, matrix.getNbColumns()-1);
+            }
+
             int r = -1;
             
             for (int i=0;i<matrix.getNbLines();i++) 
