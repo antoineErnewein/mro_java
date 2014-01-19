@@ -1,4 +1,5 @@
 
+import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -16,7 +17,11 @@ public class Start
 
     public static void main (String[] args)
    {
-       double data[][] = {{1,0,0},{0,2,0},{2,1,2}};
+       branchBound();
+   }
+    
+    private static void simplexe() {
+        double data[][] = {{1,0,0},{0,2,0},{2,1,2}};
        Matrice test = new Matrice(data);
        
        System.out.println("Matrice A : \n");
@@ -39,10 +44,23 @@ public class Start
         
         catch (MatrixException ex) {
             Logger.getLogger(Start.class.getName()).log(Level.SEVERE, null, ex);
+        }    
+    }
+    
+    private static void branchBound() {
+        try {
+        String filename = "";
+        
+        Scanner sc = new Scanner(System.in);
+        
+        System.out.println("** Branch and Bound **");
+        System.out.println("Nom du fichier : ");
+        filename = sc.nextLine();
+        
+        String arg[] = {filename};
+        BranchBound.main(arg);
         }
-       
-        
-        
-   }
+        catch(Exception e) { System.out.println(e);}
+    }
     
 }
