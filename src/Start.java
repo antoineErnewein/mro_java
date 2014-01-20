@@ -34,6 +34,34 @@ public class Start {
             
             switch (choice) {
 
+                case 5:
+                  Scanner scanner = new Scanner(System.in);
+                  int[][] matrix;
+                  int nbNoeuds;
+                  int source;
+                  int puits;
+                   
+                  System.out.println("Entrez le nombre de noeuds du graphe: ");
+                  nbNoeuds = scanner.nextInt();
+                  matrix = new int[nbNoeuds + 1][nbNoeuds + 1];
+ 
+                 System.out.println("Entrez la matrice représentative du graphe:");
+                 for(int i = 1; i <= nbNoeuds; i++){
+                    for(int j = 1; j <= nbNoeuds; j++){
+                        matrix[i][j] = scanner.nextInt();
+                    }
+                }
+                System.out.println("Entrez le puit du graphe:");
+                puits = scanner.nextInt();
+                System.out.println("Entrez la source du graphe:");
+                source= scanner.nextInt();
+
+                int maxFlow;
+
+                FordFulkerson fordFulkerson = new FordFulkerson(nbNoeuds);
+                maxFlow = fordFulkerson.findMaxFlow(matrix, source, puits);
+                System.out.println("Le flot maximal du graphe est: " + maxFlow);
+                    break;
                 case 4:
                     Johnson.main(new String[0]);
                     break;
