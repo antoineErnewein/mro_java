@@ -33,9 +33,6 @@ public class Start {
             System.out.println("\n");
             
             switch (choice) {
-		case 1 :
-		    ProgrammationDynamique.main(new String[0]);
-		    break;
                 case 2 :
                     FloydWarshall.main(new String[0]);
                     break;
