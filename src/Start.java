@@ -35,7 +35,34 @@ public class Start {
             switch (choice) {
 
                 case 5:
-                  Scanner scanner = new Scanner(System.in);
+                    fordfulkerson();
+                    break;
+                case 4:
+                    Johnson.main(new String[0]);
+                    break;
+                case 6:
+                    branchBound();
+                    break;
+                case 7:
+                    try {
+                        simplexe();
+                    } catch (MatrixException ex) {
+                        Logger.getLogger(Start.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    break;
+                default:
+                    System.exit(0);
+            }
+            
+            System.out.println("Tapez sur une touche pour continuer ...");
+            sc.nextLine();
+        }
+
+    }
+    
+    
+    private static void fordfulkerson() {
+                          Scanner scanner = new Scanner(System.in);
                   int[][] matrix;
                   int nbNoeuds;
                   int source;
@@ -61,28 +88,6 @@ public class Start {
                 FordFulkerson fordFulkerson = new FordFulkerson(nbNoeuds);
                 maxFlow = fordFulkerson.findMaxFlow(matrix, source, puits);
                 System.out.println("Le flot maximal du graphe est: " + maxFlow);
-                    break;
-                case 4:
-                    Johnson.main(new String[0]);
-                    break;
-                case 6:
-                    branchBound();
-                    break;
-                case 7:
-                    try {
-                        simplexe();
-                    } catch (MatrixException ex) {
-                        Logger.getLogger(Start.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-                    break;
-                default:
-                    System.exit(0);
-            }
-            
-            System.out.println("Tapez sur une touche pour continuer ...");
-            sc.nextLine();
-        }
-
     }
 
     private static void simplexe() throws MatrixException {
