@@ -1,8 +1,8 @@
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class Potentiels {
-    public static void getShortestPaths(ArrayList<Tache> taches){
+public class MPM {
+    public static void setEarliestAndLatest(ArrayList<Tache> taches){
         ArrayList<Tache> start = new ArrayList<Tache>();
         
         for(Tache tache : taches){
@@ -77,7 +77,7 @@ public class Potentiels {
            System.out.println(t);
        }
        System.out.println("MPM :");
-       getShortestPaths(taches);
+       setEarliestAndLatest(taches);
        for(Tache t:taches){
            System.out.println(t);
        }
