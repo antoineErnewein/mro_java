@@ -33,12 +33,14 @@ public class Start {
             System.out.println("\n");
             
             switch (choice) {
-
-                case 5:
-                    fordfulkerson();
+                case 2 : 
+                    MPM.main(new String[0]);
                     break;
                 case 4:
                     Johnson.main(new String[0]);
+                    break;
+                case 5:
+                    fordfulkerson();
                     break;
                 case 6:
                     branchBound();
