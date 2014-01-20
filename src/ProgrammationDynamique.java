@@ -1,4 +1,3 @@
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -88,7 +87,7 @@ public class ProgrammationDynamique {
                         }
                         else {                                                        
                             if ((this.findMax && nouveauPoids > nouveauxPoidsCourants.get(indexAncienChemin)) || (!this.findMax && nouveauPoids < nouveauxPoidsCourants.get(indexAncienChemin))) {
-                                    nouveauxCheminsCourants.remove(indexAncienChemin);
+                                    nouveauxPoidsCourants.remove(indexAncienChemin);
                                     nouveauxCheminsCourants.remove(indexAncienChemin);
 
                                     nouveauxPoidsCourants.add(nouveauPoids);
