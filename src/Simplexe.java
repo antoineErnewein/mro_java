@@ -130,7 +130,7 @@ public class Simplexe
         
         System.out.println("\n===> Init Simplexe :\n");
         System.out.println("i appartenant à B :\n");
-        ciDansB.printMatrice();
+        iDansB.printMatrice();
         System.out.println("\nMatrice B :\n");
         this.B.printMatrice();
         System.out.println("\nMatrice N :\n");
