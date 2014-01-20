@@ -33,7 +33,10 @@ public class Start {
             System.out.println("\n");
             
             switch (choice) {
-                case 2 : 
+                case 2 :
+                    FloydWarshall.main(new String[0]);
+                    break;
+                case 3 : 
                     MPM.main(new String[0]);
                     break;
                 case 4:
