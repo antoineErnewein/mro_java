@@ -188,7 +188,7 @@ public class BranchBound
 
    public static void main (String[] args) throws Exception
    {
-      String filename = args[0].trim().equals("") ? "RoadSet.txt"
+      String filename = args[0].trim().equals("") ? "A.txt"
                                          : args[0];
       Scanner inp = new Scanner ( new java.io.File(filename) );
 
@@ -201,10 +201,12 @@ public class BranchBound
          for ( Tour opt : soln )
             System.out.println(opt);
       }
-      if ( soln.size() == 0 )
-      {  System.out.println("NO tours discovered.  Exiting.");
+      if ( soln.isEmpty() )
+      {  
+         System.out.println("NO tours discovered.  Exiting.");
          System.exit(0);
       }
+      
       System.out.println (Tour.nTours + " Tour objects generated.");
       Collections.sort(soln);
       System.out.println("Best tour:  ");
